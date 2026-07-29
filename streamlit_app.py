@@ -480,7 +480,7 @@ if page == "🏠 Overview":
     </div>
     """,
     unsafe_allow_html=True
-)
+    )
     st.header("📊 Key Performance Indicators")
 
     st.write(
@@ -539,7 +539,141 @@ if page == "🏠 Overview":
         df,
         use_container_width=True
     )
+    st.divider()
 
+    st.header("🔍 Data Quality Analysis")
+
+    st.write(
+        "Before building the machine learning model, "
+        "we check the dataset for missing values and "
+        "zero values in budget and revenue."
+    )
+
+    # Missing values analysis
+    missing_values = df.isnull().sum()
+
+    missing_data = pd.DataFrame({
+        "Column": missing_values.index,
+        "Missing Values": missing_values.values
+    })
+
+    st.subheader("📋 Missing Values")
+
+    st.dataframe(
+        missing_data,
+        use_container_width=True
+    )
+        st.divider()
+
+    st.header("🎯 Movie Success Analysis")
+
+    st.write(
+        "A movie is considered financially successful when "
+        "its revenue is greater than its production budget."
+    )
+
+    # Calculate success and failure counts
+    successful_movies = (df["success"] == 1).sum()
+    unsuccessful_movies = (df["success"] == 0).sum()
+
+    total_movies = len(df)
+
+    # Calculate proportions
+    success_percentage = (
+        successful_movies / total_movies
+    ) * 100
+
+    failure_percentage = (
+        unsuccessful_movies / total_movies
+    ) * 100
+
+    # Display success metrics
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "✅ Successful Movies",
+            f"{successful_movies:,}"
+        )
+
+    with col2:
+        st.metric(
+            "❌ Unsuccessful Movies",
+            f"{unsuccessful_movies:,}"
+        )
+
+    with col3:
+        st.metric(
+            "📊 Success Rate",
+            f"{success_percentage:.2f}%"
+        )
+
+    # Success distribution chart
+    st.subheader("📈 Success vs Unsuccessful Movies")
+
+    success_distribution = pd.DataFrame({
+        "Movie Outcome": [
+            "Successful",
+            "Unsuccessful"
+        ],
+        "Number of Movies": [
+            successful_movies,
+            unsuccessful_movies
+        ]
+    })
+
+    st.bar_chart(
+        success_distribution.set_index(
+            "Movie Outcome"
+        )
+    )
+
+    # Dataset balance interpretation
+    if 40 <= success_percentage <= 60:
+
+        st.success(
+            f"The dataset is approximately balanced. "
+            f"{success_percentage:.2f}% of movies are successful "
+            f"and {failure_percentage:.2f}% are unsuccessful."
+        )
+
+    else:
+
+        st.warning(
+            f"The dataset is imbalanced. "
+            f"{success_percentage:.2f}% of movies are successful "
+            f"and {failure_percentage:.2f}% are unsuccessful. "
+            "This imbalance should be considered when evaluating "
+            "the classification model."
+        )
+
+    # Zero budget and revenue analysis
+    zero_budget = (df["budget"] == 0).sum()
+    zero_revenue = (df["revenue"] == 0).sum()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "💰 Movies with Zero Budget",
+            f"{zero_budget:,}"
+        )
+
+    with col2:
+        st.metric(
+            "🎬 Movies with Zero Revenue",
+            f"{zero_revenue:,}"
+        )
+
+    st.info(
+        "A budget or revenue value of zero may represent "
+        "missing or unavailable financial information rather "
+        "than a genuinely zero value. Such records can affect "
+        "profit calculations and the accuracy of machine "
+        "learning models. These rows should be reviewed and "
+        "handled appropriately before final model training."
+    )
+    
 
 # ==============================
 # MOVIE INSIGHTS PAGE
@@ -550,45 +684,58 @@ if page == "🔥 Movie Insights":
     st.header("🔥 Top 10 Most Popular Movies")
     st.subheader("🎬 Movie Performance Overview")
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.metric(
-        "🔥 Highest Popularity",
-        f"{df['popularity'].max():.2f}"
-    )
+    with col1:
+        st.metric(
+            "🔥 Highest Popularity",
+            f"{df['popularity'].max():.2f}"
+        )
 
-with col2:
-    st.metric(
-        "💰 Highest Revenue",
-        f"${df['revenue'].max():,.0f}"
-    )
+    with col2:
+        st.metric(
+            "💰 Highest Revenue",
+            f"${df['revenue'].max():,.0f}"
+        )
 
-with col3:
-    st.metric(
-        "📈 Highest Profit",
-        f"${df['profit'].max():,.0f}"
-    )
+    with col3:
+        st.metric(
+            "📈 Highest Profit",
+            f"${df['profit'].max():,.0f}"
+        )
 
-st.divider()
-top_10_popular = df.sort_values(
+    st.divider()
+
+    st.header("🔥 Top 10 Most Popular Movies")
+
+    top_10_popular = df.sort_values(
         by="popularity",
         ascending=False
     ).head(10)
-st.bar_chart(
+
+    st.bar_chart(
         top_10_popular.set_index("title")["popularity"]
     )
-st.header("💰 Top 10 Most Profitable Movies")
-top_10_profit = df.sort_values(
+
+    st.header("💰 Top 10 Most Profitable Movies")
+
+    top_10_profit = df.sort_values(
         by="profit",
         ascending=False
     ).head(10)
 
-st.bar_chart(
+    st.bar_chart(
         top_10_profit.set_index("title")["profit"]
     )
 
+    st.divider()
 
+    st.header("📊 Success Factor Analysis")
+
+    st.write(
+        "This analysis compares successful and unsuccessful movies "
+        "based on popularity, runtime, and average audience rating."
+    )
 # ==============================
 # GENRE LAB PAGE
 # ==============================
