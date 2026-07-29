@@ -23,23 +23,32 @@ st.set_page_config(
 )
 
 # ==============================
-# MOVIEIQ CINEMATIC THEME
+# MOVIEIQ — NEON CINEMA THEME
+# Netflix + Premium Cinema + Futuristic Data Analytics
 # ==============================
 
 st.markdown("""
 <style>
 
+/* =================================
+   MAIN APP
+   ================================= */
+
 .stApp {
-    background-color: #0B0B0F;
-    color: #F5F5F5;
+    background-color: #080B14;
+    color: #F4F7FF;
 }
 
 .main {
-    background-color: #0B0B0F;
+    background-color: #080B14;
 }
 
+/* =================================
+   HEADINGS
+   ================================= */
+
 h1 {
-    color: #F4C95D;
+    color: #F4F7FF;
     font-family: Georgia, serif;
     font-size: 3.2rem;
     font-weight: 700;
@@ -47,124 +56,344 @@ h1 {
 }
 
 h2 {
-    color: #F4C95D;
+    color: #4DA3FF;
     font-family: Georgia, serif;
+    margin-top: 2rem;
 }
 
 h3 {
-    color: #E8E8E8;
+    color: #F4F7FF;
+    font-family: Georgia, serif;
 }
+
+/* =================================
+   NORMAL TEXT
+   ================================= */
 
 p {
-    color: #C9C9C9;
+    color: #A8B0C2;
 }
 
+/* =================================
+   METRIC CARDS
+   ================================= */
+
 [data-testid="stMetric"] {
-    background-color: #15151C;
-    border: 1px solid #2B2B35;
+    background: linear-gradient(
+        145deg,
+        #10182B,
+        #151D34
+    );
+
+    border: 1px solid #263654;
     border-radius: 15px;
+
     padding: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.35);
+
+    box-shadow:
+        0px 5px 20px rgba(0, 0, 0, 0.45);
+}
+
+[data-testid="stMetricLabel"] {
+    color: #A8B0C2;
 }
 
 [data-testid="stMetricValue"] {
-    color: #F4C95D;
+    color: #4DA3FF;
 }
 
+/* =================================
+   BUTTONS
+   ================================= */
+
 .stButton > button {
-    background-color: #F4C95D;
-    color: #0B0B0F;
+    background: linear-gradient(
+        135deg,
+        #4DA3FF,
+        #8B5CF6
+    );
+
+    color: #F4F7FF;
+
     border: none;
     border-radius: 10px;
+
     padding: 10px 24px;
+
     font-weight: 700;
+
+    box-shadow:
+        0px 4px 15px rgba(77, 163, 255, 0.25);
+
+    transition: all 0.3s ease;
 }
 
 .stButton > button:hover {
-    background-color: #FFD970;
-    color: #000000;
-}
-
-[data-testid="stSidebar"] {
-    background-color: #111116;
-    border-right: 1px solid #2B2B35;
-}
-
-.hero-section {
     background: linear-gradient(
         135deg,
-        #111116 0%,
-        #191922 50%,
-        #0B0B0F 100%
+        #8B5CF6,
+        #E879F9
     );
 
-    border: 1px solid #2B2B35;
+    color: #FFFFFF;
+
+    box-shadow:
+        0px 5px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* =================================
+   SIDEBAR
+   ================================= */
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(
+        180deg,
+        #10182B 0%,
+        #0B1020 50%,
+        #080B14 100%
+    );
+
+    border-right: 1px solid #263654;
+}
+
+[data-testid="stSidebar"] p {
+    color: #A8B0C2;
+}
+
+/* Sidebar Navigation Text */
+
+[data-testid="stSidebar"] label {
+    color: #F4F7FF;
+}
+
+/* =================================
+   HERO SECTION
+   ================================= */
+
+.hero-section {
+    background:
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(77, 163, 255, 0.18),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 70% 80%,
+            rgba(139, 92, 246, 0.12),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #10182B 0%,
+            #15142F 50%,
+            #080B14 100%
+        );
+
+    border: 1px solid #263654;
+
     border-radius: 24px;
+
     padding: 55px 60px;
+
     margin: 20px 0 35px 0;
-    box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.45);
+
+    box-shadow:
+        0px 12px 40px rgba(0, 0, 0, 0.55);
+
     position: relative;
+
     overflow: hidden;
 }
 
+/* Futuristic Glow */
+
 .hero-section::after {
     content: "";
+
     position: absolute;
-    width: 300px;
-    height: 300px;
-    background: rgba(244, 201, 93, 0.08);
+
+    width: 350px;
+    height: 350px;
+
+    background: rgba(139, 92, 246, 0.12);
+
     border-radius: 50%;
-    right: -100px;
-    top: -100px;
-    filter: blur(40px);
+
+    right: -120px;
+    top: -120px;
+
+    filter: blur(50px);
 }
+
+/* Hero Content */
 
 .hero-content {
     position: relative;
     z-index: 2;
 }
 
+/* Hero Eyebrow */
+
 .hero-eyebrow {
-    color: #F4C95D;
+    color: #4DA3FF;
+
     font-size: 13px;
+
     font-weight: 700;
+
     letter-spacing: 3px;
+
     margin-bottom: 15px;
 }
 
+/* MovieIQ Title */
+
 .hero-title {
     font-family: Georgia, serif;
+
     font-size: 5rem;
+
     font-weight: 800;
+
     letter-spacing: 4px;
-    color: #F5F5F5;
+
+    color: #F4F7FF;
+
     margin: 0;
+
+    text-shadow:
+        0px 0px 20px rgba(77, 163, 255, 0.15);
 }
 
+/* IQ Accent */
+
 .hero-title span {
-    color: #F4C95D;
+    color: #4DA3FF;
+
+    text-shadow:
+        0px 0px 20px rgba(77, 163, 255, 0.45);
 }
+
+/* Hero Tagline */
 
 .hero-tagline {
     font-family: Georgia, serif;
+
     font-size: 1.5rem;
-    color: #F4C95D;
+
+    color: #8B5CF6;
+
     margin-top: 5px;
+
     margin-bottom: 20px;
 }
 
+/* Hero Description */
+
 .hero-description {
     max-width: 750px;
+
     font-size: 17px;
+
     line-height: 1.7;
-    color: #BDBDC7;
+
+    color: #A8B0C2;
+
     margin-bottom: 0;
 }
 
-</style>
-""",unsafe_allow_html=True
-)
+/* =================================
+   ALERT / INFO BOXES
+   ================================= */
 
+[data-testid="stAlert"] {
+    background-color: #10182B;
+
+    border: 1px solid #263654;
+
+    color: #F4F7FF;
+}
+
+/* =================================
+   DIVIDERS
+   ================================= */
+
+hr {
+    border-color: #263654;
+}
+
+/* =================================
+   SELECTBOX
+   ================================= */
+
+[data-baseweb="select"] > div {
+    background-color: #10182B;
+
+    border-color: #263654;
+
+    color: #F4F7FF;
+}
+
+/* =================================
+   INPUT BOXES
+   ================================= */
+
+[data-baseweb="input"] {
+    background-color: #10182B;
+
+    border-color: #263654;
+}
+
+input {
+    color: #F4F7FF !important;
+}
+
+/* =================================
+   DATAFRAME
+   ================================= */
+
+[data-testid="stDataFrame"] {
+    border: 1px solid #263654;
+
+    border-radius: 10px;
+}
+
+/* =================================
+   CAPTIONS
+   ================================= */
+
+.stCaption {
+    color: #A8B0C2;
+}
+
+/* =================================
+   SCROLLBAR
+   ================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080B14;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #263654;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4DA3FF;
+}
+
+</style>
+""", unsafe_allow_html=True
+)
 
 # ==============================
 # SIDEBAR NAVIGATION
