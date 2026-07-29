@@ -563,7 +563,7 @@ if page == "🏠 Overview":
         missing_data,
         use_container_width=True
     )
-        st.divider()
+    st.divider()
 
     st.header("🎯 Movie Success Analysis")
 
@@ -750,60 +750,54 @@ if page == "🎭 Genre Lab":
         "and audience insights."
     )
     st.subheader("🎭 Movies by Genre")
-
-genre_counts = df["genre"].value_counts()
-
-st.bar_chart(
-    genre_counts
-)
-
-st.divider()
-genres = sorted(df["genre"].unique())
-selected_genre = st.selectbox(
+    genre_counts = df["genre"].value_counts()
+    st.bar_chart(
+        genre_counts
+    )
+    
+    st.divider()
+    genres = sorted(df["genre"].unique())
+    selected_genre = st.selectbox(
         "🎬 Select a Genre",
         genres
     )
-genre_data = df[
+    genre_data = df[
         df["genre"] == selected_genre
     ]
-genre_movie_count = len(genre_data)
-genre_avg_revenue = genre_data["revenue"].mean()
-genre_avg_profit = genre_data["profit"].mean()
-genre_avg_rating = genre_data["vote_average"].mean()
-
-st.subheader(
+    genre_movie_count = len(genre_data)
+    genre_avg_revenue = genre_data["revenue"].mean()
+    genre_avg_profit = genre_data["profit"].mean()
+    genre_avg_rating = genre_data["vote_average"].mean()
+    st.subheader(
         f"📊 {selected_genre} Insights"
     )
-
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
         st.metric(
             "🎬 Movies",
             f"{genre_movie_count:,}"
         )
-
-with col2:
+        
+        with col2:
         st.metric(
             "💰 Avg Revenue",
             f"${genre_avg_revenue:,.0f}"
         )
-
-with col3:
+        
+        with col3:
         st.metric(
             "📈 Avg Profit",
             f"${genre_avg_profit:,.0f}"
         )
-
-with col4:
+        
+        with col4:
         st.metric(
             "⭐ Avg Rating",
             f"{genre_avg_rating:.2f}"
         )
-
-st.subheader("💰 Revenue vs Profit")
-
-financial_data = pd.DataFrame({
+        st.subheader("💰 Revenue vs Profit")
+        financial_data = pd.DataFrame({
         "Metric": [
             "Average Revenue",
             "Average Profit"
@@ -812,17 +806,15 @@ financial_data = pd.DataFrame({
             genre_avg_revenue,
             genre_avg_profit
         ]
-    })
-
-st.bar_chart(
+        })
+        st.bar_chart(
         financial_data.set_index("Metric")
-    )
-
-st.subheader(
+        )
+        st.subheader(
         f"🎬 Movies in {selected_genre}"
-    )
-
-st.dataframe(
+        )
+        
+        st.dataframe(
         genre_data[
             [
                 "title",
@@ -834,7 +826,7 @@ st.dataframe(
             ]
         ],
         use_container_width=True
-    )
+        )
 
 
 # ==============================
@@ -1556,18 +1548,17 @@ if page == "📊 Model Comparison":
 # =============================
 if page == "📈 Statistical Analysis":
      st.header("📈 Statistical Analysis")
-
-st.write(
+     st.write(
         "Statistical tests are used to identify whether "
         "relationships and differences observed in the movie "
         "dataset are statistically significant."
-    )
+     )
 
     # ==============================
     # T-TEST
+st.subheader("🧪 T-Test: Revenue of Succ
     # ==============================
-
-st.subheader("🧪 T-Test: Revenue of Successful vs Unsuccessful Movies")
+essful vs Unsuccessful Movies")
 
 st.write(
         "The independent samples t-test compares the average "
